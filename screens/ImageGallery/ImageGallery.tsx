@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import ImagePreview, { Image } from "./ImagePreview";
-import Searchbar from "./Searchbar";
 import { useRouter } from "next/router";
 
 export default function ImageGallery() {
@@ -15,14 +14,15 @@ export default function ImageGallery() {
 
   return (
     <div>
-      <Searchbar />
-      {data?.hits.map((imageObj) => {
-        return (
-          <div key={imageObj.id}>
-            <ImagePreview imageObj={imageObj} />
-          </div>
-        );
-      })}
+      <div className="grid gap-14px [grid-template-columns:repeat(auto-fill,minmax(200px,1fr))] px-48px justify-center">
+        {data?.hits.map((imageObj) => {
+          return (
+            <div key={imageObj.id}>
+              <ImagePreview imageObj={imageObj} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

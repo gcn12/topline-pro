@@ -6,12 +6,7 @@ type Inputs = {
 };
 
 export default function Searchbar() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
 
   const router = useRouter();
 
@@ -21,10 +16,20 @@ export default function Searchbar() {
     });
   };
   return (
-    <div>
+    <div className="bg-grey-900 max-w-[400px] py-32px mx-auto flex justify-center rounded-8px">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input autoComplete="off" {...register("search")} />
-        <button>search</button>
+        <label className="visually-hidden" htmlFor="search-box">
+          search for images
+        </label>
+        <div className="flex w-full">
+          <input
+            className="h-40px w-full"
+            id="search-box"
+            autoComplete="off"
+            {...register("search")}
+          />
+          <button className="bg-black text-white h-40px px-16px">search</button>
+        </div>
       </form>
     </div>
   );
