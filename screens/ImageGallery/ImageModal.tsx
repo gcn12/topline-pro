@@ -32,7 +32,7 @@ export default function ImageModal({ children, imageObj }: Props) {
             borderRadius: "12px",
           }}
         />
-        <Spacer size={24} axis="y" />
+        <Spacer size={30} axis="y" />
         {imageObj.userImageURL ? (
           <div className="flex items-center">
             <NextImage

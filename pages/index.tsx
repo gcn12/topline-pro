@@ -14,7 +14,7 @@ export default function Home() {
         <title>Image Gallery</title>
       </Head>
       <Header />
-      <Spacer size={36} axis="y" />
+      <Spacer size={48} axis="y" />
       <Searchbar />
       <Spacer size={56} axis="y" />
       <ImageGallery />
