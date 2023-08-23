@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ImageModal from "./ImageModal";
 
 interface Props {
   imageObj: Image;
@@ -7,7 +8,9 @@ interface Props {
 export default function ImagePreview({ imageObj }: Props) {
   return (
     <div>
-      <Image src={imageObj.previewURL} alt="" width={200} height={200} />
+      <ImageModal imageObj={imageObj}>
+        <Image src={imageObj.previewURL} alt="" width={200} height={200} />
+      </ImageModal>
     </div>
   );
 }
