@@ -1,6 +1,7 @@
-import { Inter, League_Spartan } from "next/font/google";
-import ImageGallery from "@/screens/ImageGallery/ImageGallery";
+import { League_Spartan } from "next/font/google";
 import Head from "next/head";
+
+import ImageGallery from "@/screens/ImageGallery/ImageGallery";
 import Searchbar from "@/screens/ImageGallery/Searchbar";
 import Spacer from "@/components/Spacer";
 import Header from "@/screens/Global/Header";

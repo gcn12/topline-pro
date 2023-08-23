@@ -1,15 +1,16 @@
-import Image from "next/image";
-import ImageModal from "./ImageModal";
+import { useEffect, useState } from "react";
+import NextImage from "next/image";
 import { motion } from "framer-motion";
 import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
+
+import ImageModal from "./ImageModal";
 import Spacer from "@/components/Spacer";
-import { useEffect, useState } from "react";
 
 interface Props {
   imageObj: Image;
 }
 
-const MotionImage = motion(Image);
+const MotionImage = motion(NextImage);
 
 export default function ImagePreview({ imageObj }: Props) {
   const [isStarred, setIsStarred] = useState(false);

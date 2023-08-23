@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { Dialog } from "@radix-ui/themes";
-import { Image } from "./ImagePreview";
 import NextImage from "next/image";
+
+import { Image } from "./ImagePreview";
 import Spacer from "@/components/Spacer";
 import { league } from "@/pages";
-import Link from "next/link";
 
 interface Props {
   children: React.ReactNode;

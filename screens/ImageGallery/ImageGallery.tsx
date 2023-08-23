@@ -4,21 +4,20 @@ import { useRouter } from "next/router";
 
 export default function ImageGallery() {
   const router = useRouter();
-  const search = router.query.search;
-  const sort = router.query.sort;
-  const display = router.query.display;
+  const { query } = router;
+  const search = query.search;
+  const sort = query.sort;
+  const display = query.display;
 
-  const { data, isLoading } = useQuery(
-    ["images", search, sort],
-    () => fetchImages({ searchParam: search, sort }),
-    { enabled: !!search }
+  const { data, isLoading } = useQuery(["images", search, sort], () =>
+    fetchImages({ searchParam: search, sort })
   );
 
-  const filteredData = data?.hits.filter((hit) => {
+  const filteredData = data?.filter((item) => {
     if (display === "all" || display === undefined) {
       return true;
     }
-    return localStorage.getItem(String(hit.id)) === "true";
+    return localStorage.getItem(String(item.id)) === "true";
   });
 
   return (
@@ -45,15 +44,19 @@ const fetchImages = async ({
 }: {
   searchParam: string | string[] | undefined;
   sort: string | string[] | undefined;
-}): Promise<ImagesRes> => {
-  if (typeof searchParam !== "string") {
-    throw new Error("invalid param");
+}): Promise<Image[]> => {
+  if (typeof searchParam !== "string" && typeof searchParam !== "undefined") {
+    return [];
   }
 
   let order = "popular";
 
   if (typeof sort === "string" && sort === "newest") {
     order = "newest";
+  }
+
+  if (searchParam === undefined) {
+    searchParam = "images";
   }
 
   const URL =
@@ -63,12 +66,9 @@ const fetchImages = async ({
     encodeURIComponent(searchParam) +
     "&order=" +
     order;
-  const res = await fetch(URL);
-  return await res.json();
-};
 
-type ImagesRes = {
-  total: number;
-  totalHits: number;
-  hits: Image[];
+  const res = await fetch(URL);
+  const data = await res.json();
+
+  return data.hits;
 };

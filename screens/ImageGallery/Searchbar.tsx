@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
+
 import Select from "@/components/Select";
 import Spacer from "@/components/Spacer";
 
@@ -53,22 +54,18 @@ export default function Searchbar() {
       </form>
       <Spacer size={20} axis="y" />
       <div className="flex gap-x-14px">
-        <div className="max-w-[100px]">
-          <Select
-            defaultValue={"popular"}
-            title="sort:"
-            onChange={setSortBy}
-            values={sortValues}
-          />
-        </div>
-        <div className="max-w-[100px]">
-          <Select
-            defaultValue={"all"}
-            title="display:"
-            onChange={setDisplayBy}
-            values={displayValues}
-          />
-        </div>
+        <Select
+          defaultValue={"popular"}
+          title="sort:"
+          onChange={setSortBy}
+          values={sortValues}
+        />
+        <Select
+          defaultValue={"all"}
+          title="display:"
+          onChange={setDisplayBy}
+          values={displayValues}
+        />
       </div>
     </div>
   );
