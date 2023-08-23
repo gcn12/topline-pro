@@ -24,6 +24,12 @@ export default function Searchbar() {
     });
   };
 
+  const setDisplayBy = (type: "all" | "liked") => {
+    router.push({
+      query: { ...router.query, display: type },
+    });
+  };
+
   return (
     <div
       className="bg-[#ffffff] max-w-[500px] py-32px mx-auto flex justify-center rounded-8px 
@@ -46,13 +52,23 @@ export default function Searchbar() {
         </div>
       </form>
       <Spacer size={20} axis="y" />
-      <div className="max-w-[100px]">
-        <Select
-          defaultValue={"popular"}
-          title="sort:"
-          onChange={setSortBy}
-          values={sortValues}
-        />
+      <div className="flex gap-x-14px">
+        <div className="max-w-[100px]">
+          <Select
+            defaultValue={"popular"}
+            title="sort:"
+            onChange={setSortBy}
+            values={sortValues}
+          />
+        </div>
+        <div className="max-w-[100px]">
+          <Select
+            defaultValue={"all"}
+            title="display:"
+            onChange={setDisplayBy}
+            values={displayValues}
+          />
+        </div>
       </div>
     </div>
   );
@@ -61,4 +77,9 @@ export default function Searchbar() {
 const sortValues = [
   { name: "Popular", value: "popular" },
   { name: "Newest", value: "newest" },
+];
+
+const displayValues = [
+  { name: "All", value: "all" },
+  { name: "Liked", value: "liked" },
 ];

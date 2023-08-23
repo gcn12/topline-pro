@@ -6,23 +6,34 @@ export default function ImageGallery() {
   const router = useRouter();
   const search = router.query.search;
   const sort = router.query.sort;
+  const display = router.query.display;
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     ["images", search, sort],
     () => fetchImages({ searchParam: search, sort }),
     { enabled: !!search }
   );
 
+  const filteredData = data?.hits.filter((hit) => {
+    if (display === "all" || display === undefined) {
+      return true;
+    }
+    return localStorage.getItem(String(hit.id)) === "true";
+  });
+
   return (
     <div>
-      <div className="grid gap-14px [grid-template-columns:repeat(auto-fill,minmax(200px,1fr))] px-48px justify-center">
-        {data?.hits.map((imageObj) => {
+      <div className="grid gap-x-14px gap-y-36px [grid-template-columns:repeat(auto-fill,minmax(200px,1fr))] px-48px justify-center">
+        {filteredData?.map((imageObj) => {
           return (
             <div key={imageObj.id}>
               <ImagePreview imageObj={imageObj} />
             </div>
           );
         })}
+        {!isLoading && filteredData === undefined ? (
+          <p>No results found. Try a new search or adjust the search filters</p>
+        ) : null}
       </div>
     </div>
   );
