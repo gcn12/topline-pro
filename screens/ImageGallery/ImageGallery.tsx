@@ -5,10 +5,11 @@ import { useRouter } from "next/router";
 export default function ImageGallery() {
   const router = useRouter();
   const search = router.query.search;
+  const sort = router.query.sort;
 
   const { data } = useQuery(
-    ["images", search],
-    () => fetchImages({ searchParam: search }),
+    ["images", search, sort],
+    () => fetchImages({ searchParam: search, sort }),
     { enabled: !!search }
   );
 
@@ -29,18 +30,28 @@ export default function ImageGallery() {
 
 const fetchImages = async ({
   searchParam,
+  sort,
 }: {
   searchParam: string | string[] | undefined;
+  sort: string | string[] | undefined;
 }): Promise<ImagesRes> => {
   if (typeof searchParam !== "string") {
     throw new Error("invalid param");
+  }
+
+  let order = "popular";
+
+  if (typeof sort === "string" && sort === "newest") {
+    order = "newest";
   }
 
   const URL =
     "https://pixabay.com/api/?key=" +
     process.env.NEXT_PUBLIC_PIXABAY_KEY +
     "&q=" +
-    encodeURIComponent(searchParam);
+    encodeURIComponent(searchParam) +
+    "&order=" +
+    order;
   const res = await fetch(URL);
   return await res.json();
 };

@@ -1,4 +1,4 @@
-import { Dialog, Button } from "@radix-ui/themes";
+import { Dialog } from "@radix-ui/themes";
 import { Image } from "./ImagePreview";
 import NextImage from "next/image";
 import Spacer from "@/components/Spacer";
@@ -36,16 +36,16 @@ export default function ImageModal({ children, imageObj }: Props) {
         {imageObj.userImageURL ? (
           <div className="flex items-center">
             <NextImage
-              className="w-40px h-40px object-cover rounded-circle overflow-hidden"
+              className="w-50px h-50px object-cover rounded-circle overflow-hidden"
               src={imageObj.userImageURL}
-              height={40}
-              width={40}
+              height={50}
+              width={50}
               alt={`${imageObj.user}'s avatar`}
               style={{
                 objectFit: "cover",
                 overflow: "hidden",
-                height: "40px",
-                width: "40px",
+                height: "50px",
+                width: "50px",
                 borderRadius: "100%",
               }}
             />
@@ -54,20 +54,18 @@ export default function ImageModal({ children, imageObj }: Props) {
           </div>
         ) : null}
         <Spacer size={24} axis="y" />
-
         <p>Tags:</p>
         <Spacer size={8} axis="y" />
         <div className="flex gap-8px">
           {tags.map((tag) => {
             return (
-              <div>
-                <Link
-                  className="px-[10px] py-8px rounded-4px bg-grey-900 block"
-                  href={{ pathname: "/", query: { search: tag } }}
-                >
-                  <p className="text-14px">{tag}</p>
-                </Link>
-              </div>
+              <Link
+                key={tag}
+                className="px-[10px] py-8px rounded-4px bg-grey-900 block"
+                href={{ pathname: "/", query: { search: tag } }}
+              >
+                <p className="text-14px">{tag}</p>
+              </Link>
             );
           })}
         </div>
