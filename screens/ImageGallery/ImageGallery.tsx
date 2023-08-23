@@ -30,8 +30,13 @@ export default function ImageGallery() {
             </div>
           );
         })}
-        {!isLoading && filteredData === undefined ? (
-          <p>No results found. Try a new search or adjust the search filters</p>
+      </div>
+      <div className="flex justify-center w-full">
+        {!isLoading &&
+        (filteredData === undefined || filteredData.length === 0) ? (
+          <p className="text-center mx-auto">
+            No results found. Try a new search or adjust the search filters.
+          </p>
         ) : null}
       </div>
     </div>
