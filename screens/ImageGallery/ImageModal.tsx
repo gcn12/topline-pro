@@ -2,6 +2,7 @@ import { Dialog, Button } from "@radix-ui/themes";
 import { Image } from "./ImagePreview";
 import NextImage from "next/image";
 import Spacer from "@/components/Spacer";
+import { league } from "@/pages";
 
 interface Props {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export default function ImageModal({ children, imageObj }: Props) {
         <button>{children}</button>
       </Dialog.Trigger>
 
-      <Dialog.Content style={{ maxWidth: 850 }}>
+      <Dialog.Content style={{ maxWidth: 850 }} className={league.className}>
         <NextImage
           src={imageObj.largeImageURL}
           alt=""
