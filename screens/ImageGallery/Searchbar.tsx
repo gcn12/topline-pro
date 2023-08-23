@@ -11,10 +11,11 @@ export default function Searchbar() {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    router.replace({
+    router.push({
       query: { ...router.query, search: data.search },
     });
   };
+
   return (
     <div className="bg-grey-900 max-w-[400px] py-32px mx-auto flex justify-center rounded-8px">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -23,7 +24,7 @@ export default function Searchbar() {
         </label>
         <div className="flex w-full">
           <input
-            className="h-40px w-full"
+            className="h-40px w-full px-4px text-20px"
             id="search-box"
             autoComplete="off"
             {...register("search")}

@@ -25,6 +25,7 @@ export default function ImagePreview({ imageObj }: Props) {
             height: "200px",
             width: "200px",
             borderRadius: "12px",
+            border: "1px solid rgba(0, 0, 0, .1)",
           }}
         />
       </ImageModal>

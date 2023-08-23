@@ -3,6 +3,7 @@ import { Image } from "./ImagePreview";
 import NextImage from "next/image";
 import Spacer from "@/components/Spacer";
 import { league } from "@/pages";
+import Link from "next/link";
 
 interface Props {
   children: React.ReactNode;
@@ -56,19 +57,24 @@ export default function ImageModal({ children, imageObj }: Props) {
 
         <p>Tags:</p>
         <Spacer size={8} axis="y" />
-        <div className="flex gap-4px">
+        <div className="flex gap-8px">
           {tags.map((tag) => {
             return (
-              <div className="px-[10px] py-8px rounded-4px bg-grey-900">
-                <p className="text-14px">{tag}</p>
+              <div>
+                <Link
+                  className="px-[10px] py-8px rounded-4px bg-grey-900 block"
+                  href={{ pathname: "/", query: { search: tag } }}
+                >
+                  <p className="text-14px">{tag}</p>
+                </Link>
               </div>
             );
           })}
         </div>
-        <Spacer size={24} axis="y" />
+        <Spacer size={48} axis="y" />
         <Dialog.Close>
-          <button className="bg-black text-white px-24px py-8px rounded-6px">
-            close
+          <button className="bg-black text-white px-48px py-8px rounded-6px">
+            Close
           </button>
         </Dialog.Close>
       </Dialog.Content>
