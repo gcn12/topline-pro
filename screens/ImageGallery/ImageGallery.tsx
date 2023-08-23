@@ -57,7 +57,7 @@ const fetchImages = async ({
   let order = "popular";
 
   if (typeof sort === "string" && sort === "newest") {
-    order = "newest";
+    order = "latest";
   }
 
   if (searchParam === undefined) {
